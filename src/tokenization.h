@@ -1,0 +1,18 @@
+enum class TokenType{
+  exit,
+  int_lit,
+  semi,
+  open_paren,
+  close_paren,
+  indent,
+  let,
+  eq,
+  plus,
+  star,
+  minus,
+  fslash,
+  open_curly,
+  if_,
+  elif,
+  else_,
+};
