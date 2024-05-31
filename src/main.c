@@ -1,23 +1,36 @@
 #include <stdio.h>
+#include <string.h>
 
-int main(int argc, char* argv[]){
-  FILE* fp;
-  char buffer[1024];
-  size_t bytes_read;
+typedef enum {
+  TOKEN_INVALID,
+  TOKEN_INT,
+  TOKEN_KEYWORD_MAIN,
+  TOKEN_OPEN_PARENTHESIS,
+  TOKEN_OPEN_BRACE,
+  TOKEN_RETURN,
+  TOKEN_SEMICOLON,
+  TOKEN_CLOSE_BRACE,
+  TOKEN_EOF,
+}TokenType;
 
-  // Open the file defined in the second argument
-  fp = fopen(argv[1],"rb"); 
-  if (fp == NULL){
-    perror("Error opening file");
-    return 1;
+typedef struct {
+  TokenType token;
+  int line;
+  int column;
+  char *value;
+}Token;
+
+Token current_token;
+
+Token make_token(TokenType type, const char *value){
+  Token token = {type, current_token.line, current_token.column, strdup(value)};
+  return token;
+}
+
+void lex(FILE* file){
+  while (*current_token.value != '\0'){
+    switch (*current_token.value){
+      
+    }
   }
-  
-  // Reads file to buffer string, prints buffer string.
-  while ((bytes_read = fread(buffer, 1, 1024, fp)) > 0){
-    printf("%.*s", (int)bytes_read, buffer);
-  }
-  
-  // Closes the fp file pointer
-  fclose(fp);
-  return 0;
 }
